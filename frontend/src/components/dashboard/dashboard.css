@@ -1,0 +1,658 @@
+/* =========================================
+   APNAGIT – Elite Dashboard UI 
+   ========================================= */
+
+/* 1. LAYOUT ARCHITECTURE */
+
+/* 1. LAYOUT ARCHITECTURE (Unified) */
+
+.dashboard-container {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 48px;
+  padding: 48px 64px;
+  max-width: 1600px;
+  margin: 0 auto;
+  min-height: calc(100vh - var(--topbar-height));
+  position: relative;
+  z-index: 1;
+}
+
+/* Global Sub-page Wrapper */
+.dashboard-content-elite {
+  padding: 48px 64px;
+  max-width: 1600px;
+  margin: 0 auto;
+  min-height: 100vh;
+}
+
+.page-header-elite {
+  margin-bottom: 48px;
+}
+
+.section-subtitle {
+  font-size: 14px;
+  color: var(--text-muted);
+  font-weight: 500;
+  margin-top: 4px;
+}
+
+.dashboard-main,
+.dashboard-right-panel {
+  position: relative;
+  z-index: 1;
+  /* Above background animation */
+}
+
+.dashboard-main {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+/* 2. HEADER & NAVIGATION */
+
+.dashboard-header {
+  margin-bottom: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.dashboard-header h1 {
+  color: var(--text-primary) !important;
+}
+
+.dashboard-header p {
+  color: var(--text-muted) !important;
+}
+
+/* 3. STATS GRID (Elite Standard) */
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.metric-card {
+  background: var(--bg-card);
+  backdrop-filter: var(--backdrop-blur);
+  -webkit-backdrop-filter: var(--backdrop-blur);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: var(--shadow-md);
+  transition: all var(--duration-base) var(--ease-standard);
+  height: 152px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+}
+
+.metric-card:hover {
+  transform: translateY(-4px) scale(1.02);
+  background: var(--bg-subtle);
+  border-color: var(--primary-color);
+  box-shadow: var(--shadow-lg);
+}
+
+.metric-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.metric-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted) !important;
+}
+
+.metric-value {
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--text-primary) !important;
+  letter-spacing: -0.02em;
+}
+
+/* Icon Aesthetics */
+.icon-circle {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  transition: transform var(--duration-base) var(--ease-standard);
+}
+
+.metric-card:hover .icon-circle {
+  transform: scale(1.1) rotate(5deg);
+}
+
+.metric-card::after {
+  content: '';
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  width: 80px;
+  height: 80px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.03) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.metric-card:hover::after {
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, transparent 70%);
+}
+
+/* Contextual Accents */
+.metric-card.primary .icon-circle {
+  background: var(--primary-light);
+  color: var(--primary-color);
+  box-shadow: 0 0 20px var(--primary-softer);
+}
+
+.metric-card.warning .icon-circle {
+  background: rgba(245, 158, 11, 0.1);
+  color: #fbbf24;
+  box-shadow: 0 0 20px rgba(245, 158, 11, 0.2);
+}
+
+.metric-card.danger .icon-circle {
+  background: rgba(239, 68, 68, 0.1);
+  color: #f87171;
+  box-shadow: 0 0 20px rgba(239, 68, 68, 0.2);
+}
+
+.metric-card.info .icon-circle {
+  background: rgba(59, 130, 246, 0.1);
+  color: #60a5fa;
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
+}
+
+/* 4. QUICK ACTIONS (Pill System) */
+
+.projects-controls-elite {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.search-input-elite {
+  background: var(--bg-card);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  padding: 12px 20px;
+  color: var(--text-primary);
+  font-size: 14px;
+  width: 100%;
+  max-width: 400px;
+  transition: all var(--duration-fast);
+  outline: none;
+}
+
+.search-input-elite:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 4px var(--primary-softer);
+}
+
+.quick-actions-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.action-pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-full);
+  color: var(--text-primary);
+  font-size: 13.5px;
+  font-weight: 600;
+  transition: all var(--duration-fast) var(--ease-standard);
+  cursor: pointer;
+}
+
+.action-pill:hover {
+  background: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px -5px var(--primary-softer);
+}
+
+/* 5. RIGHT PANEL (Glassmorphism) */
+
+.dashboard-right-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.side-panel {
+  background: var(--bg-card);
+  backdrop-filter: var(--backdrop-blur);
+  -webkit-backdrop-filter: var(--backdrop-blur);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: var(--shadow-md);
+  transition: all var(--duration-base);
+}
+
+.activity-feed-unified {
+  background: var(--bg-card);
+  backdrop-filter: var(--backdrop-blur);
+  -webkit-backdrop-filter: var(--backdrop-blur);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-xl);
+  padding: 40px;
+  box-shadow: var(--shadow-lg);
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.panel-title {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-primary);
+}
+
+/* 6. TYPOGRAPHY Polish */
+
+.section-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+  margin-bottom: 24px;
+}
+
+/* Entry Animations for Grid */
+.projects-section {
+  animation: fadeInUp 1s var(--ease-out) 0.2s both;
+}
+
+/* =========================
+   7. PROJECT GRID & CARDS
+   ========================= */
+
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+}
+
+.project-card {
+  background: var(--bg-card);
+  backdrop-filter: var(--backdrop-blur);
+  -webkit-backdrop-filter: var(--backdrop-blur);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-shadow: var(--shadow-md);
+  transition: all var(--duration-base) var(--ease-standard);
+  position: relative;
+  min-height: 220px;
+}
+
+.project-card:hover {
+  transform: translateY(-4px) scale(1.02);
+  background: var(--bg-subtle);
+  border-color: var(--primary-color);
+  box-shadow: var(--shadow-lg);
+}
+
+.project-title-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.project-name {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.project-badge {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.project-desc {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-muted);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  line-clamp: 2;
+  overflow: hidden;
+  min-height: 44px;
+}
+
+.project-footer {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.contributor-stack {
+  display: flex;
+  margin-left: auto;
+  margin-right: 16px;
+}
+
+.contributor-avatar {
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  border: 2.5px solid var(--bg-card);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  color: white;
+  font-weight: 800;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* =========================
+   8. CONTRIBUTION HEATMAP
+   ========================= */
+
+.contribution-heatmap-container {
+  background: var(--glass-dark-bg);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--glass-dark-border);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.heatmap-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.heatmap-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.heatmap-legend {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.legend-swatch {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+}
+
+.heatmap-scroll-container {
+  overflow-x: auto;
+  padding-bottom: 8px;
+}
+
+.heatmap-grid-wrapper {
+  display: flex;
+  gap: 4px;
+}
+
+.days-column {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin-right: 8px;
+  padding-top: 18px;
+}
+
+.day-label {
+  height: 10px;
+  font-size: 9px;
+  color: var(--text-muted-dark);
+  font-weight: 700;
+}
+
+.weeks-container {
+  display: flex;
+  gap: 3px;
+}
+
+.heatmap-week {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  position: relative;
+}
+
+.month-label {
+  position: absolute;
+  margin-top: -18px;
+  font-size: 10px;
+  color: var(--text-muted-dark);
+  font-weight: 700;
+}
+
+.heatmap-cell {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  transition: transform 0.2s;
+  cursor: pointer;
+}
+
+.heatmap-cell:hover {
+  transform: scale(1.3);
+}
+
+/* =========================
+   9. TIMELINE & PULSE FEED
+   ========================= */
+
+.timeline-feed {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  /* Breathing room */
+  padding: 8px 0;
+}
+
+.timeline-item {
+  display: flex;
+  gap: 16px;
+  position: relative;
+}
+
+.timeline-line {
+  position: absolute;
+  left: 6px;
+  top: 24px;
+  bottom: -16px;
+  width: 1px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.timeline-item:last-child .timeline-line {
+  display: none;
+}
+
+.timeline-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--primary-color);
+  margin-top: 6px;
+  z-index: 1;
+  border: 3px solid var(--bg-main);
+  box-shadow: 0 0 10px var(--primary-softer);
+}
+
+.timeline-dot.pulse {
+  animation: pulseGlow 2s infinite;
+}
+
+@keyframes pulseGlow {
+  0% {
+    box-shadow: 0 0 0 0 var(--primary-light);
+  }
+
+  70% {
+    box-shadow: 0 0 0 8px rgba(16, 185, 129, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+  }
+}
+
+.timeline-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.timeline-text {
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--text-primary);
+}
+
+.timeline-user {
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+.timeline-time {
+  font-size: 11px;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+/* 10. PR LIST POLISH */
+
+.pr-item {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  transition: transform 0.2s;
+}
+
+.pr-item:hover {
+  transform: translateX(4px);
+}
+
+.pr-icon-wrapper {
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pr-info {
+  flex: 1;
+}
+
+.pr-title {
+  font-weight: 700;
+  font-size: 13.5px;
+  color: var(--text-primary);
+  margin-bottom: 2px;
+}
+
+.pr-meta {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.pr-status {
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.pr-time {
+  color: var(--text-muted-dark);
+  font-size: 11px;
+}
+
+/* 9. RESPONSIVE FLOW */
+
+@media (max-width: 1280px) {
+  .dashboard-container {
+    padding: 32px 40px;
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard-right-panel {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .dashboard-right-panel {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+}
